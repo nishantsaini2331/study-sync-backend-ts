@@ -1,5 +1,13 @@
 import { Document, Types } from "mongoose";
 
+export interface SocialInterFace {
+  youtube?: string;
+  twitter?: string;
+  linkedin?: string;
+  github?: string;
+  website?: string;
+}
+
 export interface IUser extends Document {
   name: string;
   email: string;
@@ -10,13 +18,7 @@ export interface IUser extends Document {
   createdCourses: Types.ObjectId[];
   photoUrl: string;
   photoUrlId: string | null;
-  socials: {
-    youtube: string;
-    twitter: string;
-    linkedin: string;
-    github: string;
-    website: string;
-  };
+  socials: SocialInterFace;
   bio: string;
   headline: string;
   qualification:
