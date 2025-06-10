@@ -8,4 +8,4 @@ router.post("/:courseId", auth, student, cartController.addToCart);
 
 router.delete("/:courseId", auth, student, cartController.removeFromCart);
 
-module.exports = router;
+export default router;

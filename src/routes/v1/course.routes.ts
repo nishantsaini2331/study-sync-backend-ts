@@ -58,4 +58,4 @@ router.patch(
 
 router.delete("/:id", auth, instructor, courseController.deleteCourse);
 
-module.exports = router;
+export default router;

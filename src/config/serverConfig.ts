@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 interface ServerConfig {
   PORT: number;
   MONGO_URI: string;
@@ -18,6 +20,7 @@ interface ServerConfig {
   RAZORPAY_SECRET: string;
 
   ADMIN_USER_ID: string;
+  DEFAULT_CATEGORY_ID: string | Types.ObjectId;
 
   FRONTEND_URL: string;
   NODE_ENV: string;
@@ -72,4 +75,6 @@ export const serverConfig: ServerConfig = {
   FIREBASE_CLIENT_X509_CERT_URL:
     process.env.FIREBASE_CLIENT_X509_CERT_URL || "",
   FIREBASE_UNIVERSAL_DOMAIN: process.env.FIREBASE_UNIVERSAL_DOMAIN || "",
+  DEFAULT_CATEGORY_ID:
+    process.env.DEFAULT_CATEGORY_ID || "67a46c535bd71fbf48818e80",
 };

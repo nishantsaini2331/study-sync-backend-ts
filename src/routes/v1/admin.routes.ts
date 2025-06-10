@@ -26,4 +26,4 @@ router.get(
   adminController.getAllTestimonials
 );
 
-module.exports = router;
+export default router;
