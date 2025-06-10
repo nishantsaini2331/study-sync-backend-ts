@@ -1,5 +1,8 @@
 import { Document, Types } from "mongoose";
 import { IUser } from "./user.interface";
+import { IReviewAndRating } from "./reviewRating.interface";
+import { IFinalQuiz } from "./finalQuiz.model";
+import { ICategory } from "./category.interface";
 
 export interface ICourse extends Document {
   title: string;
@@ -18,14 +21,14 @@ export interface ICourse extends Document {
   totalDuration?: number;
   totalLectures?: number;
   lectures: Types.ObjectId[];
-  finalQuiz: Types.ObjectId;
+  finalQuiz: Types.ObjectId | IFinalQuiz;
   requiredCompletionPercentage: number;
   status: "draft" | "published" | "under review" | "rejected";
   courseVerification: Types.ObjectId | null;
-  category: Types.ObjectId;
+  category: Types.ObjectId | ICategory;
 
   whatYouWillLearn: string[];
-  reviewAndRating: Types.ObjectId[];
+  reviewAndRating: (Types.ObjectId | IReviewAndRating)[];
   courseStats: {
     totalStudents: number;
     totalRevenue: number;
