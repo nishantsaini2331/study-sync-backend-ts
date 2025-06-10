@@ -9,6 +9,7 @@ import commentRoutes from "./comment.routes";
 import courseVerifyRoutes from "./courseVerify.routes";
 import finalQuizRoutes from "./finalQuiz.routes";
 import homePageRoutes from "./homePage.routes";
+import instructorRoutes from "./instructor.routes";
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use("/comment", commentRoutes);
 router.use("/course-verify", courseVerifyRoutes);
 router.use("/final-quiz", finalQuizRoutes);
 router.use("/home-page", homePageRoutes);
+router.use("/instructor", instructorRoutes);
 
 export default router;

@@ -8,6 +8,7 @@ import commentController from "./comment.controller";
 import courseVerifyController from "./courseVerify.controller";
 import finalQuizController from "./finalQuiz.controller";
 import homePageController from "./homePage.controller";
+import instructorController from "./instructor.controller";
 
 export {
   userController,
@@ -20,4 +21,5 @@ export {
   courseVerifyController,
   finalQuizController,
   homePageController,
+  instructorController,
 };

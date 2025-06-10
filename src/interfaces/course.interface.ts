@@ -3,6 +3,7 @@ import { IUser } from "./user.interface";
 import { IReviewAndRating } from "./reviewRating.interface";
 import { IFinalQuiz } from "./finalQuiz.model";
 import { ICategory } from "./category.interface";
+import { ILecture } from "./lecture.interface";
 
 export interface ICourse extends Document {
   title: string;
@@ -10,7 +11,7 @@ export interface ICourse extends Document {
   courseId: string;
   minimumSkill: "beginner" | "intermediate" | "advanced";
   instructor: IUser | Types.ObjectId;
-  enrolledStudents: Types.ObjectId[];
+  enrolledStudents: (Types.ObjectId | IUser)[];
   price: number;
   thumbnail: string;
   thumbnailId: string;
@@ -20,7 +21,7 @@ export interface ICourse extends Document {
   language: string;
   totalDuration?: number;
   totalLectures?: number;
-  lectures: Types.ObjectId[];
+  lectures: (Types.ObjectId | ILecture)[];
   finalQuiz: Types.ObjectId | IFinalQuiz;
   requiredCompletionPercentage: number;
   status: "draft" | "published" | "under review" | "rejected";
