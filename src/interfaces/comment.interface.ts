@@ -6,7 +6,7 @@ export interface IComment extends Document {
   course: Types.ObjectId;
   student: Types.ObjectId;
   likes: Types.ObjectId[];
-  replies: Types.ObjectId[];
+  replies: (Types.ObjectId | IComment)[];
   parentComment: Types.ObjectId;
   isPinned: boolean;
   isInstructor: boolean;

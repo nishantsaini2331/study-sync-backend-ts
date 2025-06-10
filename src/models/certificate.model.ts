@@ -1,9 +1,15 @@
 import mongoose, { Types } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
-import { ICertificate } from "../interfaces/certificate.interface";
+import {
+  ICertificate,
+  ICertificateModel,
+} from "../interfaces/certificate.interface";
 import { ICourse } from "../interfaces/course.interface";
 
-const courseCertificationSchema = new mongoose.Schema<ICertificate>(
+const courseCertificationSchema = new mongoose.Schema<
+  ICertificate,
+  ICertificateModel
+>(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -125,7 +131,7 @@ courseCertificationSchema.methods.verifyCertificate = function () {
   };
 };
 
-const CourseCertification = mongoose.model<ICertificate>(
+const CourseCertification = mongoose.model<ICertificate, ICertificateModel>(
   "CourseCertification",
   courseCertificationSchema
 );

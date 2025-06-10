@@ -412,7 +412,7 @@ async function updateUser(
 
     if (
       isUserExistWithUsername &&
-      isUserExistWithUsername._id != req.user?.id
+      isUserExistWithUsername._id.toString() != req.user?.id
     ) {
       res.status(400).json({
         success: false,

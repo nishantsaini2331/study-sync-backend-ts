@@ -113,7 +113,7 @@ async function deleteComment(req: Request, res: Response, next: NextFunction) {
       }
 
       for (let replyId of comment.replies) {
-        await deleteCommentAndReplies(replyId);
+        await deleteCommentAndReplies(replyId as Types.ObjectId);
       }
 
       if (comment.parentComment) {

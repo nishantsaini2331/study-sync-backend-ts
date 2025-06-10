@@ -3,6 +3,7 @@ import { IUser } from "./user.interface";
 import { ICourse } from "./course.interface";
 import { ILecture } from "./lecture.interface";
 import { IFinalQuiz } from "./finalQuiz.model";
+import { IQuizAttempt } from "./quizAttempt.interface";
 
 export interface ILectureProgress {
   lecture: Types.ObjectId | ILecture;
@@ -21,4 +22,9 @@ export interface ICourseProgress extends Document {
   finalQuizAttemptLeft: number;
   createdAt: Date;
   updatedAt: Date;
+
+  updateLectureProgress(
+    lectureId: Types.ObjectId,
+    quizAttempt: IQuizAttempt
+  ): Promise<void>;
 }

@@ -10,6 +10,7 @@ import courseVerifyRoutes from "./courseVerify.routes";
 import finalQuizRoutes from "./finalQuiz.routes";
 import homePageRoutes from "./homePage.routes";
 import instructorRoutes from "./instructor.routes";
+import studentRoutes from "./student.routes";
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use("/course-verify", courseVerifyRoutes);
 router.use("/final-quiz", finalQuizRoutes);
 router.use("/home-page", homePageRoutes);
 router.use("/instructor", instructorRoutes);
+router.use("/student", studentRoutes);
 
 export default router;

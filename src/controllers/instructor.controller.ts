@@ -8,8 +8,9 @@ import Lecture from "../models/lecture.model";
 import Payment from "../models/payment.model";
 import ReviewAndRating from "../models/reviewAndRating.model";
 import User from "../models/user.model";
-import { populateReplies } from "./student.controller";
+import studentController from "./student.controller";
 import { ILecture } from "../interfaces/lecture.interface";
+import { IComment } from "../interfaces/comment.interface";
 
 async function instructorStats(instructor: IUser) {
   const stats = {
@@ -97,7 +98,7 @@ async function instructorDashboard(
         });
         return;
       }
-      userId = user._id as string;
+      userId = user._id.toString();
     }
 
     const instructor = (await User.findById(userId).populate(
@@ -451,7 +452,7 @@ async function studentsDetails(
       status: string;
       courseId?: string;
     } = {
-      instructor: instructor._id as string,
+      instructor: instructor._id.toString(),
       status: "published",
     };
 
@@ -672,7 +673,19 @@ async function getLectureComments(
         select: "name email username profilePic",
       },
     });
-    lecture.comments = await populateReplies(lecture.comments);
+
+    if (!lecture) {
+      res.status(404).json({
+        success: false,
+        message: "Lecture not found",
+      });
+      return;
+    }
+
+    lecture.comments = await studentController.populateReplies(
+      lecture.comments as IComment[]
+    );
+
     if (!lecture) {
       res.status(404).json({
         success: false,
