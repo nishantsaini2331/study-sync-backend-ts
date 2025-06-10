@@ -5,6 +5,7 @@ import cartController from "./cart.controller";
 import categoryController from "./category.controller";
 import certificateController from "./certificate.controller";
 import commentController from "./comment.controller";
+import courseVerifyController from "./courseVerify.controller";
 
 export {
   userController,
@@ -14,4 +15,5 @@ export {
   categoryController,
   certificateController,
   commentController,
+  courseVerifyController,
 };
