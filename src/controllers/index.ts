@@ -4,6 +4,7 @@ import adminController from "./admin.controller";
 import cartController from "./cart.controller";
 import categoryController from "./category.controller";
 import certificateController from "./certificate.controller";
+import commentController from "./comment.controller";
 
 export {
   userController,
@@ -12,4 +13,5 @@ export {
   cartController,
   categoryController,
   certificateController,
+  commentController,
 };
