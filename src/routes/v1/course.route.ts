@@ -8,7 +8,7 @@ import {
   isInstructorOrAdmin,
 } from "../../middlewares/auth";
 import { validateReqBody } from "../../middlewares/validate";
-import { CreateCourseSchema } from "../../dto/course.dto";
+import { CreateCourseSchema, UpdateCourseSchema } from "../../dto/course.dto";
 
 const router = express.Router();
 
@@ -44,16 +44,17 @@ router.get("/", auth, instructor, courseController.getCourses);
 router.get("/:id", auth, isInstructorOrAdmin, courseController.getCourse); // this is for instructor
 router.get("/public/:id", courseController.getCourseForStudent); // this is for student
 
-// router.patch(
-//   "/:id",
-//   auth,
-//   instructor,
-//   upload.fields([
-//     { name: "thumbnail", maxCount: 1 },
-//     { name: "previewVideo", maxCount: 1 },
-//   ]),
-//   updateCourse
-// );
+router.patch(
+  "/:id",
+  auth,
+  instructor,
+  upload.fields([
+    { name: "thumbnail", maxCount: 1 },
+    { name: "previewVideo", maxCount: 1 },
+  ]),
+  validateReqBody(UpdateCourseSchema),
+  courseController.updateCourse
+);
 
 router.delete("/:id", auth, instructor, courseController.deleteCourse);
 
