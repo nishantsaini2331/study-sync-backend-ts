@@ -28,4 +28,4 @@ const homePageSchema = new mongoose.Schema<IHomePage>(
 );
 const HomePage = mongoose.model<IHomePage>("HomePage", homePageSchema);
 
-module.exports = HomePage;
+export default HomePage;
