@@ -29,6 +29,7 @@ const { randomUUID } = new ShortUniqueId({ length: 6 });
 
 import { uploadMedia, deleteMediaFromCloudinary } from "../utils/cloudinary";
 import { UploadApiResponse } from "cloudinary";
+import { ICourse } from "../interfaces/course.interface";
 
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -635,7 +636,7 @@ async function fetchProfile(
       });
       return;
     }
-    let createdCourses = user.createdCourses.filter(
+    let createdCourses = (user.createdCourses as ICourse[]).filter(
       (course) => course.status === "published"
     );
 

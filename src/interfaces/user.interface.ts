@@ -1,4 +1,6 @@
 import { Document, Types } from "mongoose";
+import { ICourse } from "./course.interface";
+import { IPayment } from "./payment.interface";
 
 export interface SocialInterFace {
   youtube?: string;
@@ -14,8 +16,8 @@ export interface IUser extends Document {
   password: string;
   username: string;
   roles: ("instructor" | "student" | "admin")[];
-  purchasedCourses: Types.ObjectId[];
-  createdCourses: Types.ObjectId[];
+  purchasedCourses: (Types.ObjectId | ICourse)[];
+  createdCourses: (Types.ObjectId | ICourse)[];
   photoUrl: string;
   photoUrlId: string | null;
   socials: SocialInterFace;
@@ -32,8 +34,8 @@ export interface IUser extends Document {
   googleAuth: boolean;
   courseCreateLimit: number;
   instructorOnBoardFrom: Types.ObjectId | null;
-  cart: Types.ObjectId[];
-  paymentHistory: Types.ObjectId[];
+  cart: (Types.ObjectId | ICourse)[];
+  paymentHistory: (Types.ObjectId | IPayment)[];
   resetPasswordToken: string | null;
   resetPasswordExpires: Date | null;
   lastPasswordChange: Date | null;

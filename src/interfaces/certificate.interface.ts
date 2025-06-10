@@ -1,8 +1,10 @@
 import { Document, Types } from "mongoose";
+import { IUser } from "./user.interface";
+import { ICourse } from "./course.interface";
 
 export interface ICertificate extends Document {
-  user: Types.ObjectId;
-  course: Types.ObjectId;
+  user: Types.ObjectId | IUser;
+  course: Types.ObjectId | ICourse;
   learnerName: string;
   courseName: string;
   instructorName: string;

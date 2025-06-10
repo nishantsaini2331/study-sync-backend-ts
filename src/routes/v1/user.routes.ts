@@ -15,6 +15,7 @@ import { auth } from "../../middlewares/auth";
 import upload from "../../utils/multer";
 import User from "../../models/user.model";
 import { IUser } from "../../interfaces/user.interface";
+import { ICourse } from "../../interfaces/course.interface";
 const router = express.Router();
 
 router.post(
@@ -70,7 +71,7 @@ router.get("/auth", auth, async (req: Request, res: Response) => {
     .populate({ path: "cart", select: "courseId -_id" })
     .lean()) as IUser;
 
-  const courseIds = user.cart.map((course) => course.courseId);
+  const courseIds = (user.cart as ICourse[]).map((course) => course.courseId);
 
   res.json({
     user: {
