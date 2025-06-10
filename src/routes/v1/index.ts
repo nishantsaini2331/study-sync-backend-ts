@@ -7,6 +7,7 @@ import categoryRoutes from "./category.routes";
 import certificateRoutes from "./certificate.routes";
 import commentRoutes from "./comment.routes";
 import courseVerifyRoutes from "./courseVerify.routes";
+import finalQuizRoutes from "./finalQuiz.routes";
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use("/category", categoryRoutes);
 router.use("/certificate", certificateRoutes);
 router.use("/comment", commentRoutes);
 router.use("/course-verify", courseVerifyRoutes);
+router.use("/final-quiz", finalQuizRoutes);
 
 export default router;

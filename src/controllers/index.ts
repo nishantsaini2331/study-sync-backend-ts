@@ -6,6 +6,7 @@ import categoryController from "./category.controller";
 import certificateController from "./certificate.controller";
 import commentController from "./comment.controller";
 import courseVerifyController from "./courseVerify.controller";
+import finalQuizController from "./finalQuiz.controller";
 
 export {
   userController,
@@ -16,4 +17,5 @@ export {
   certificateController,
   commentController,
   courseVerifyController,
+  finalQuizController,
 };
