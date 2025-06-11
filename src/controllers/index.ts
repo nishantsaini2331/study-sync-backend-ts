@@ -12,6 +12,7 @@ import instructorController from "./instructor.controller";
 import studentController from "./student.controller";
 import lectureController from "./lecture.controller";
 import paymentController from "./payment.controller";
+import requestController from "./request.controller";
 
 export {
   userController,
@@ -28,4 +29,5 @@ export {
   studentController,
   lectureController,
   paymentController,
+  requestController,
 };
