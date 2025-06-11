@@ -5,6 +5,7 @@ import {
   appErrorHandler,
   genericErrorHandler,
 } from "./middlewares/error.middleware";
+import { connectDB } from "./config/dbConfig";
 
 const app = express();
 
@@ -16,4 +17,5 @@ app.use(genericErrorHandler);
 
 app.listen(serverConfig.PORT, () => {
   console.log("Server is started");
+  connectDB();
 });
