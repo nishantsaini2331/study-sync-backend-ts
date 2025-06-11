@@ -1,39 +1,45 @@
-const express = require("express");
+import express from "express";
+import { auth, student } from "../../middlewares/auth";
+import { studentController } from "../../controllers";
 
 const router = express.Router();
 
-const { auth, student } = require("../middlewares/auth");
-const {
-  getStudentCourseById,
-  unlockLecture,
-  getCurrentLecture,
-  submitFinalQuiz,
-  getEnrolledCourses,
-  getCartCourses,
-  getCertificates,
-  getPaymentDetails,
-  getProgress,
-} = require("../controllers/student.controller");
-
-router.route("/:id/learn").get(auth, student, getStudentCourseById);
+router
+  .route("/:id/learn")
+  .get(auth, student, studentController.getStudentCourseById);
 
 router
   .route("/:courseId/:lectureId/unlock-lecture")
-  .patch(auth, student, unlockLecture);
+  .patch(auth, student, studentController.unlockLecture);
 
 router.get(
   "/current-lecture/:courseId/:lectureId",
   auth,
   student,
-  getCurrentLecture
+  studentController.getCurrentLecture
 );
 
-router.post("/:courseId/submit-final-quiz", auth, student, submitFinalQuiz);
+router.post(
+  "/:courseId/submit-final-quiz",
+  auth,
+  student,
+  studentController.submitFinalQuiz
+);
 
-router.get("/enrolled-course", auth, student, getEnrolledCourses);
-router.get("/cart-courses", auth, student, getCartCourses);
-router.get("/certificates", auth, student, getCertificates);
-router.get("/payment-details", auth, student, getPaymentDetails);
-router.get("/progress/:username", auth, student, getProgress);
+router.get(
+  "/enrolled-course",
+  auth,
+  student,
+  studentController.getEnrolledCourses
+);
+router.get("/cart-courses", auth, student, studentController.getCartCourses);
+router.get("/certificates", auth, student, studentController.getCertificates);
+router.get(
+  "/payment-details",
+  auth,
+  student,
+  studentController.getPaymentDetails
+);
+router.get("/progress/:username", auth, student, studentController.getProgress);
 
 export default router;

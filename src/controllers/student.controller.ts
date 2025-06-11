@@ -523,10 +523,11 @@ async function submitFinalQuiz(
 
     for (let i = 0; i < mcqs.length; i++) {
       if (!Object.keys(userAnswers).includes(mcqs[i]._id.toString())) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           message: "Please make sure you have answered all questions",
         });
+        return;
       }
     }
 
@@ -799,10 +800,11 @@ async function getProgress(req: Request, res: Response, next: NextFunction) {
         select: "title lectureId isCompleted isUnlocked quizAttempts",
       });
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       data: courseProgress,
     });
+    return;
   } catch (error) {
     next(error);
   }
