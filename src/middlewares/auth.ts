@@ -1,15 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import { serverConfig } from "../config/serverConfig";
 
-import jwt, { JwtPayload } from "jsonwebtoken";
 import { ForbiddenError } from "../utils/errors/app.error";
 import { verifyAuthToken } from "../utils/jwt";
 import { JWTUser } from "../dto/user.dto";
 
-async function auth(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
+async function auth(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
-    const token = req.cookies.token;
-
+    const token = req?.cookies?.token;
     if (!token) {
       res.status(401).json({
         success: false,
@@ -26,7 +27,11 @@ async function auth(req: Request & { user?: JWTUser }, res: Response, next: Next
   }
 }
 
-async function admin(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
+async function admin(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
 
@@ -43,7 +48,11 @@ async function admin(req: Request & { user?: JWTUser }, res: Response, next: Nex
   }
 }
 
-async function instructor(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
+async function instructor(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
 
@@ -60,7 +69,11 @@ async function instructor(req: Request & { user?: JWTUser }, res: Response, next
   }
 }
 
-async function student(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
+async function student(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
 
@@ -77,7 +90,11 @@ async function student(req: Request & { user?: JWTUser }, res: Response, next: N
   }
 }
 
-function isInstructorOrAdmin(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
+function isInstructorOrAdmin(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   const roles = req.user?.roles || [];
   if (roles.includes("instructor") || roles.includes("admin")) {
     next();

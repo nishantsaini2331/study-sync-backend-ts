@@ -6,9 +6,18 @@ import {
   genericErrorHandler,
 } from "./middlewares/error.middleware";
 import { connectDB } from "./config/dbConfig";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: serverConfig.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api", apiRoutes);

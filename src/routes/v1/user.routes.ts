@@ -17,7 +17,6 @@ import upload from "../../utils/multer";
 import User from "../../models/user.model";
 import { IUser } from "../../interfaces/user.interface";
 import { ICourse } from "../../interfaces/course.interface";
-import { Types } from "mongoose";
 const router = express.Router();
 
 router.post(
@@ -76,12 +75,10 @@ router.get(
     },
     res: Response
   ) => {
-    console.log(typeof req.user);
     const { id } = req.user as JWTUser;
     const user = (await User.findById(id)
       .select("name photoUrl username roles email courseCreateLimit cart")
-      .populate({ path: "cart", select: "courseId -_id" })
-      .lean()) as IUser;
+      .populate({ path: "cart", select: "courseId -_id" })) as IUser;
 
     const courseIds = (user.cart as ICourse[]).map((course) => course.courseId);
 
