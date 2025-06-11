@@ -6,9 +6,10 @@ import {
   CreateReviewAndRatingDto,
   UpdateReviewAndRatingDto,
 } from "../dto/reviewAndRating.dto";
+import { JWTUser } from "../dto/user.dto";
 
 async function getReviewAndRating(
-  req: Request<{ courseId: string }>,
+  req: Request<{ courseId: string }> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -57,7 +58,9 @@ async function getReviewAndRating(
 }
 
 async function addReviewAndRating(
-  req: Request<{ courseId: string }, {}, CreateReviewAndRatingDto>,
+  req: Request<{ courseId: string }, {}, CreateReviewAndRatingDto> & {
+    user?: JWTUser;
+  },
   res: Response,
   next: NextFunction
 ) {
@@ -111,7 +114,9 @@ async function addReviewAndRating(
 }
 
 async function updateReviewAndRating(
-  req: Request<{ courseId: string }, {}, UpdateReviewAndRatingDto>,
+  req: Request<{ courseId: string }, {}, UpdateReviewAndRatingDto> & {
+    user?: JWTUser;
+  },
   res: Response,
   next: NextFunction
 ) {
@@ -168,7 +173,7 @@ async function updateReviewAndRating(
 }
 
 async function deleteReviewAndRating(
-  req: Request<{ courseId: string }>,
+  req: Request<{ courseId: string }> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

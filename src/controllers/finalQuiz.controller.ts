@@ -4,6 +4,7 @@ import FinalQuiz from "../models/finalQuiz.model";
 import MCQ from "../models/mcq.model";
 import { CreateQuizDto, UpdateQuizDto } from "../dto/finalQuiz.dto";
 import { Types } from "mongoose";
+import { JWTUser } from "../dto/user.dto";
 
 // function validateQuiz(quiz) {
 //   if (!quiz || !quiz.length) {
@@ -44,7 +45,7 @@ import { Types } from "mongoose";
 // }
 
 async function createFinalQuiz(
-  req: Request<{ courseId: string }, any, CreateQuizDto>,
+  req: Request<{ courseId: string }, any, CreateQuizDto> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -99,7 +100,11 @@ async function createFinalQuiz(
   }
 }
 
-async function getFinalQuiz(req: Request, res: Response, next: NextFunction) {
+async function getFinalQuiz(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
     const { courseId } = req.params;
@@ -132,7 +137,7 @@ async function getFinalQuiz(req: Request, res: Response, next: NextFunction) {
 }
 
 async function updateFinalQuiz(
-  req: Request<{ courseId: string }, any, UpdateQuizDto>,
+  req: Request<{ courseId: string }, any, UpdateQuizDto> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

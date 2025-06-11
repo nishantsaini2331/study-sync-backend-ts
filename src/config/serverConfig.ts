@@ -1,4 +1,7 @@
 import { Types } from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 interface ServerConfig {
   PORT: number;
@@ -54,8 +57,8 @@ export const serverConfig: ServerConfig = {
   NODEMAILER_PASSWORD: process.env.NODEMAILER_PASS || "",
   NODEMAILER_PORT: parseInt(process.env.NODEMAILER_PORT || "465", 10),
 
-  RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID || "",
-  RAZORPAY_SECRET: process.env.RAZORPAY_SECRET || "",
+  RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID! || "",
+  RAZORPAY_SECRET: process.env.RAZORPAY_SECRET! || "",
 
   ADMIN_USER_ID: process.env.ADMIN_USER_ID || "",
 

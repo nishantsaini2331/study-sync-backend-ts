@@ -2,8 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import Course from "../models/course.model";
 import User from "../models/user.model";
 import { Types } from "mongoose";
+import { JWTUser } from "../dto/user.dto";
 
-async function addToCart(req: Request, res: Response, next: NextFunction) {
+async function addToCart(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { courseId } = req.params;
 
@@ -31,7 +36,11 @@ async function addToCart(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function removeFromCart(req: Request, res: Response, next: NextFunction) {
+async function removeFromCart(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { courseId } = req.params;
 

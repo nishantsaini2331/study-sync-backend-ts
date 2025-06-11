@@ -153,7 +153,11 @@ async function createCourse(
   }
 }
 
-async function getCourses(req: Request, res: Response, next: NextFunction) {
+async function getCourses(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
 
@@ -306,7 +310,11 @@ async function updateCourse(
   }
 }
 
-async function deleteCourse(req: Request, res: Response, next: NextFunction) {
+async function deleteCourse(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const courseId = req.params.id;
     const course = await Course.findOne({ courseId }).populate("finalQuiz");
@@ -555,7 +563,7 @@ async function getCourseForStudent(
 }
 
 async function checkStudentEnrollment(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -586,7 +594,7 @@ async function checkStudentEnrollment(
 }
 
 async function checkInstructor(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

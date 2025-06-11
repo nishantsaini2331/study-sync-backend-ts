@@ -4,6 +4,7 @@ import { validateParams, validateReqBody } from "../../middlewares/validate";
 import {
   FetchProfileSchema,
   ForgotPasswordSchema,
+  JWTUser,
   LoginUserSchema,
   OnboardFormSchema,
   RegisterUserSchema,
@@ -16,6 +17,7 @@ import upload from "../../utils/multer";
 import User from "../../models/user.model";
 import { IUser } from "../../interfaces/user.interface";
 import { ICourse } from "../../interfaces/course.interface";
+import { Types } from "mongoose";
 const router = express.Router();
 
 router.post(
@@ -65,22 +67,33 @@ router.post(
   userController.verifyResetToken
 );
 
-router.get("/auth", auth, async (req: Request, res: Response) => {
-  const user = (await User.findById(req.user?.id)
-    .select("name photoUrl username roles email courseCreateLimit cart")
-    .populate({ path: "cart", select: "courseId -_id" })
-    .lean()) as IUser;
-
-  const courseIds = (user.cart as ICourse[]).map((course) => course.courseId);
-
-  res.json({
-    user: {
-      ...user.toObject(),
-      cart: courseIds,
+router.get(
+  "/auth",
+  auth,
+  async (
+    req: Request & {
+      user?: JWTUser;
     },
-    success: true,
-    message: "Authorized access",
-  });
-});
+    res: Response
+  ) => {
+    console.log(typeof req.user);
+    const { id } = req.user as JWTUser;
+    const user = (await User.findById(id)
+      .select("name photoUrl username roles email courseCreateLimit cart")
+      .populate({ path: "cart", select: "courseId -_id" })
+      .lean()) as IUser;
+
+    const courseIds = (user.cart as ICourse[]).map((course) => course.courseId);
+
+    res.json({
+      user: {
+        ...user.toObject(),
+        cart: courseIds,
+      },
+      success: true,
+      message: "Authorized access",
+    });
+  }
+);
 
 export default router;

@@ -15,6 +15,7 @@ import crypto from "crypto";
 import { NextFunction, Request, Response } from "express";
 import { IUser, SocialInterFace } from "../interfaces/user.interface";
 import {
+  JWTUser,
   LoginUserDTO,
   OnboardFormDTO,
   RegisterUserDTO,
@@ -387,7 +388,7 @@ async function getUser(
 }
 
 async function updateUser(
-  req: Request<{}, {}, UpdateUserDTO>,
+  req: Request<{}, {}, UpdateUserDTO> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -481,7 +482,11 @@ async function updateUser(
   }
 }
 
-async function deleteUser(req: Request, res: Response, next: NextFunction) {
+async function deleteUser(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = await User.findByIdAndDelete(req.user?.id);
 
@@ -507,7 +512,7 @@ async function deleteUser(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function changePassword(req: Request, res: Response, next: NextFunction) {
+async function changePassword(req: Request& { user?: JWTUser }, res: Response, next: NextFunction) {
   try {
     const { newPassword, currentPassword } = req.body;
 
@@ -565,7 +570,7 @@ async function changePassword(req: Request, res: Response, next: NextFunction) {
 }
 
 async function onboard(
-  req: Request<{}, {}, OnboardFormDTO>,
+  req: Request<{}, {}, OnboardFormDTO>& { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

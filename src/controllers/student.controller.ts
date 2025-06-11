@@ -40,7 +40,7 @@ async function populateReplies(comments: IComment[]) {
 }
 
 async function getStudentCourseById(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -202,7 +202,11 @@ async function getStudentCourseById(
   }
 }
 
-async function unlockLecture(req: Request, res: Response, next: NextFunction) {
+async function unlockLecture(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const student = req.user;
     const { courseId, lectureId } = req.params;
@@ -345,7 +349,7 @@ async function unlockLecture(req: Request, res: Response, next: NextFunction) {
 }
 
 async function getCurrentLecture(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -457,7 +461,7 @@ async function getCurrentLecture(
 }
 
 async function submitFinalQuiz(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -622,7 +626,7 @@ async function submitFinalQuiz(
 }
 
 async function getEnrolledCourses(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -659,7 +663,11 @@ async function getEnrolledCourses(
   }
 }
 
-async function getCartCourses(req: Request, res: Response, next: NextFunction) {
+async function getCartCourses(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const student = req.user;
 
@@ -695,7 +703,7 @@ async function getCartCourses(req: Request, res: Response, next: NextFunction) {
 }
 
 async function getCertificates(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -722,7 +730,7 @@ async function getCertificates(
 }
 
 async function getPaymentDetails(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -759,7 +767,11 @@ async function getPaymentDetails(
   }
 }
 
-async function getProgress(req: Request, res: Response, next: NextFunction) {
+async function getProgress(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const student = req.user;
     const { username } = req.params;

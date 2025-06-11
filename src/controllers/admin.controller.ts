@@ -4,8 +4,13 @@ import Course from "../models/course.model";
 import Payment from "../models/payment.model";
 import ReviewAndRating from "../models/reviewAndRating.model";
 import User from "../models/user.model";
+import { JWTUser } from "../dto/user.dto";
 
-async function adminDashboard(req: Request, res: Response, next: NextFunction) {
+async function adminDashboard(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { timeFilter = "all" } = req.query;
 

@@ -8,9 +8,10 @@ import QRCode from "qrcode";
 import { serverConfig } from "../config/serverConfig";
 import { NextFunction, Request, Response } from "express";
 import { IUser } from "../interfaces/user.interface";
+import { JWTUser } from "../dto/user.dto";
 
 async function downloadCertificate(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

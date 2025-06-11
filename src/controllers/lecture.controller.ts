@@ -13,9 +13,10 @@ import {
   UpdateLectureDto,
   UpdateMcqDTO,
 } from "../dto/lecture.dto";
+import { JWTUser } from "../dto/user.dto";
 
 async function createLecture(
-  req: Request<{ id: string }, {}, CreateLectureDto>,
+  req: Request<{ id: string }, {}, CreateLectureDto> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

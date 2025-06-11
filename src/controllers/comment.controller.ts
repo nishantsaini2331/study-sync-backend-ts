@@ -3,8 +3,13 @@ import Comment from "../models/comment.model";
 import Course from "../models/course.model";
 import Lecture from "../models/lecture.model";
 import { Types } from "mongoose";
+import { JWTUser } from "../dto/user.dto";
 
-async function addComment(req: Request, res: Response, next: NextFunction) {
+async function addComment(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
 
@@ -71,7 +76,11 @@ async function addComment(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function deleteComment(req: Request, res: Response, next: NextFunction) {
+async function deleteComment(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = req.user;
     const { id } = req.params;
@@ -141,7 +150,11 @@ async function deleteComment(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function editComment(req: Request, res: Response, next: NextFunction) {
+async function editComment(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const student = req.user;
     const { id } = req.params;
@@ -184,7 +197,7 @@ async function editComment(req: Request, res: Response, next: NextFunction) {
 }
 
 async function likeDislikeComment(
-  req: Request,
+  req: Request& { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -228,7 +241,7 @@ async function likeDislikeComment(
 }
 
 async function addNestedComment(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -305,7 +318,7 @@ async function addNestedComment(
   }
 }
 
-async function pinComment(req: Request, res: Response, next: NextFunction) {
+async function pinComment(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
   try {
     const instructor = req.user;
     const { id } = req.params;

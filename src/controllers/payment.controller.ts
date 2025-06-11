@@ -11,9 +11,10 @@ import mongoose, { Types } from "mongoose";
 import { serverConfig } from "../config/serverConfig";
 import { CreateOrderDto, VerifyPaymentDto } from "../dto/payment.dto";
 import { ILecture } from "../interfaces/lecture.interface";
+import { JWTUser } from "../dto/user.dto";
 
 async function createOrder(
-  req: Request<{}, {}, CreateOrderDto>,
+  req: Request<{}, {}, CreateOrderDto> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -55,7 +56,7 @@ async function createOrder(
 }
 
 async function verifyPayment(
-  req: Request<{}, {}, VerifyPaymentDto>,
+  req: Request<{}, {}, VerifyPaymentDto> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

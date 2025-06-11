@@ -4,8 +4,9 @@ import { serverConfig } from "../config/serverConfig";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ForbiddenError } from "../utils/errors/app.error";
 import { verifyAuthToken } from "../utils/jwt";
+import { JWTUser } from "../dto/user.dto";
 
-async function auth(req: Request, res: Response, next: NextFunction) {
+async function auth(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
   try {
     const token = req.cookies.token;
 
@@ -25,7 +26,7 @@ async function auth(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function admin(req: Request, res: Response, next: NextFunction) {
+async function admin(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
   try {
     const user = req.user;
 
@@ -42,7 +43,7 @@ async function admin(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function instructor(req: Request, res: Response, next: NextFunction) {
+async function instructor(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
   try {
     const user = req.user;
 
@@ -59,7 +60,7 @@ async function instructor(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function student(req: Request, res: Response, next: NextFunction) {
+async function student(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
   try {
     const user = req.user;
 
@@ -76,7 +77,7 @@ async function student(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-function isInstructorOrAdmin(req: Request, res: Response, next: NextFunction) {
+function isInstructorOrAdmin(req: Request & { user?: JWTUser }, res: Response, next: NextFunction) {
   const roles = req.user?.roles || [];
   if (roles.includes("instructor") || roles.includes("admin")) {
     next();
@@ -86,7 +87,7 @@ function isInstructorOrAdmin(req: Request, res: Response, next: NextFunction) {
 }
 
 function isInstructorOrStudent(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -99,7 +100,7 @@ function isInstructorOrStudent(
 }
 
 function isInstructorOrAdminOrStudent(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

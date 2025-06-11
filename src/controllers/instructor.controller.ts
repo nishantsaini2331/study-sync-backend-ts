@@ -11,6 +11,7 @@ import User from "../models/user.model";
 import studentController from "./student.controller";
 import { ILecture } from "../interfaces/lecture.interface";
 import { IComment } from "../interfaces/comment.interface";
+import { JWTUser } from "../dto/user.dto";
 
 async function instructorStats(instructor: IUser) {
   const stats = {
@@ -80,7 +81,7 @@ async function instructorStats(instructor: IUser) {
 }
 
 async function instructorDashboard(
-  req: Request<{ username: string }>,
+  req: Request<{ username: string }> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -391,7 +392,7 @@ async function instructorDashboard(
 }
 
 async function instructorCourses(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -429,7 +430,7 @@ async function instructorCourses(
 }
 
 async function studentsDetails(
-  req: Request<{}, {}, {}, { courseId?: string }>,
+  req: Request<{}, {}, {}, { courseId?: string }> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -624,7 +625,11 @@ async function studentsDetails(
   }
 }
 
-async function getLectures(req: Request, res: Response, next: NextFunction) {
+async function getLectures(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { courseId } = req.params;
     const instructor = req.user;
@@ -658,7 +663,7 @@ async function getLectures(req: Request, res: Response, next: NextFunction) {
 }
 
 async function getLectureComments(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -723,7 +728,7 @@ async function getLectureComments(
 }
 
 async function courseDetailStats(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -1031,7 +1036,7 @@ async function courseDetailStats(
 }
 
 async function canInstructorCreateCourse(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

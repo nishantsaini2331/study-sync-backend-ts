@@ -21,7 +21,11 @@ import { Types } from "mongoose";
 import { IRequest } from "../interfaces/request.interface";
 import { IFinalQuiz } from "../interfaces/finalQuiz.model";
 
-async function createRequest(req: Request, res: Response, next: NextFunction) {
+async function createRequest(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const {
       title,
@@ -132,7 +136,7 @@ async function createRequest(req: Request, res: Response, next: NextFunction) {
 }
 
 async function handleInstructorRequest(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -230,7 +234,7 @@ async function handleInstructorRequest(
 }
 
 async function handleStudentRequest(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -288,7 +292,11 @@ async function handleStudentRequest(
   }
 }
 
-async function addComment(req: Request, res: Response, next: NextFunction) {
+async function addComment(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { comment } = req.body;
     const { id: userId, name, roles } = req.user as JWTUser;
@@ -342,7 +350,11 @@ async function addComment(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function getMyRequests(req: Request, res: Response, next: NextFunction) {
+async function getMyRequests(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const instructor = req.user;
 
@@ -368,7 +380,7 @@ async function getMyRequests(req: Request, res: Response, next: NextFunction) {
 }
 
 async function getStudentRequests(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
@@ -394,7 +406,11 @@ async function getStudentRequests(
   }
 }
 
-async function getRequests(req: Request, res: Response, next: NextFunction) {
+async function getRequests(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const requests = await RequestModel.find({ assignedTo: req.user?.id })
       .select(
@@ -413,7 +429,11 @@ async function getRequests(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function updateRequest(req: Request, res: Response, next: NextFunction) {
+async function updateRequest(
+  req: Request & { user?: JWTUser },
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { requestId } = req.params;
     const { note, status } = req.body;
@@ -568,7 +588,7 @@ async function handleInstructorApprovedRequest(
 }
 
 async function deleteRequest(
-  req: Request<{ requestId: string }>,
+  req: Request<{ requestId: string }> & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {

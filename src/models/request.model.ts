@@ -155,7 +155,6 @@ const RequestSchema = new mongoose.Schema<IRequest>(
   }
 );
 
-RequestSchema.index({ requestId: 1 });
 RequestSchema.index({ status: 1 });
 RequestSchema.index({ requestedBy: 1 });
 RequestSchema.index({ courseId: 1 });

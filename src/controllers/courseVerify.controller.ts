@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import Course from "../models/course.model";
 import CourseVerify from "../models/courseVerify.model";
+import { JWTUser } from "../dto/user.dto";
 
 async function createCourseVerify(
-  req: Request,
+  req: Request & { user?: JWTUser },
   res: Response,
   next: NextFunction
 ) {
