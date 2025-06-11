@@ -10,6 +10,7 @@ import finalQuizController from "./finalQuiz.controller";
 import homePageController from "./homePage.controller";
 import instructorController from "./instructor.controller";
 import studentController from "./student.controller";
+import lectureController from "./lecture.controller";
 
 export {
   userController,
@@ -24,4 +25,5 @@ export {
   homePageController,
   instructorController,
   studentController,
+  lectureController,
 };

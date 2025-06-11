@@ -11,6 +11,7 @@ import finalQuizRoutes from "./finalQuiz.routes";
 import homePageRoutes from "./homePage.routes";
 import instructorRoutes from "./instructor.routes";
 import studentRoutes from "./student.routes";
+import lectureRoutes from "./lecture.routes";
 
 const router = express.Router();
 
@@ -26,5 +27,6 @@ router.use("/final-quiz", finalQuizRoutes);
 router.use("/home-page", homePageRoutes);
 router.use("/instructor", instructorRoutes);
 router.use("/student", studentRoutes);
+router.use("/lecture", lectureRoutes);
 
 export default router;
