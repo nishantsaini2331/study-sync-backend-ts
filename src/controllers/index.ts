@@ -13,6 +13,7 @@ import studentController from "./student.controller";
 import lectureController from "./lecture.controller";
 import paymentController from "./payment.controller";
 import requestController from "./request.controller";
+import reviewAndRatingController from "./reviewAndRating.controller";
 
 export {
   userController,
@@ -30,4 +31,5 @@ export {
   lectureController,
   paymentController,
   requestController,
+  reviewAndRatingController,
 };

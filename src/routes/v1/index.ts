@@ -14,6 +14,7 @@ import studentRoutes from "./student.routes";
 import lectureRoutes from "./lecture.routes";
 import paymentRoutes from "./payment.routes";
 import requestRoutes from "./request.routes";
+import reviewAndRating from "./reviewAndRating.routes";
 
 const router = express.Router();
 
@@ -32,5 +33,6 @@ router.use("/student", studentRoutes);
 router.use("/lecture", lectureRoutes);
 router.use("/payment", paymentRoutes);
 router.use("/request", requestRoutes);
+router.use("/review-and-rating", reviewAndRating);
 
 export default router;
