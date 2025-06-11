@@ -12,6 +12,7 @@ import homePageRoutes from "./homePage.routes";
 import instructorRoutes from "./instructor.routes";
 import studentRoutes from "./student.routes";
 import lectureRoutes from "./lecture.routes";
+import paymentRoutes from "./payment.routes";
 
 const router = express.Router();
 
@@ -28,5 +29,6 @@ router.use("/home-page", homePageRoutes);
 router.use("/instructor", instructorRoutes);
 router.use("/student", studentRoutes);
 router.use("/lecture", lectureRoutes);
+router.use("/payment", paymentRoutes);
 
 export default router;
